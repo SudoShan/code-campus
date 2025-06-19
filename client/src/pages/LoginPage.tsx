@@ -62,86 +62,82 @@ const LoginPage: React.FC = () => {
         }
       `}</style>
 
-      <div className="min-h-screen flex flex-col bg-[url('./assets/bg.png')] bg-cover bg-center px-4">
-        {/* Header */}
-        <h1 className="text-4xl font-bold text-center mt-8 text-white">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[url('./assets/bg.png')] bg-cover bg-center px-4 space-y-6">
+        {/* CODE CAMPUS Heading */}
+        <h1 className="text-4xl font-bold text-white">
           <span className="text-white">CODE</span>{' '}
           <span className="text-yellow-300">CAMPUS</span>
         </h1>
 
-        {/* Centered Form */}
-        <div className="flex-grow flex items-center justify-center">
-          <form
-            onSubmit={handleSubmit}
-            noValidate
-            className="backdrop-blur-md bg-white/10 border border-white/30 shadow-lg p-6 rounded-lg w-full max-w-sm text-white text-sm space-y-4"
+        {/* Login Form */}
+        <form
+          onSubmit={handleSubmit}
+          noValidate
+          className="backdrop-blur-md bg-white/10 border border-white/30 shadow-lg p-6 rounded-lg w-full max-w-sm text-white text-sm space-y-4"
+        >
+          <h2 className="text-xl font-semibold text-center">Login</h2>
+
+          {/* Email Field */}
+          <div className="flex flex-col space-y-1">
+            <label htmlFor="email" className="font-medium">Email</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setEmailError('');
+              }}
+              className={`px-3 py-2 rounded bg-white text-black border ${
+                emailError ? 'border-red-500' : 'border-gray-300'
+              } focus:outline-none focus:ring-1 focus:ring-blue-500 ${emailShake ? 'shake' : ''}`}
+              placeholder="e.g. user@example.com"
+            />
+            {emailError && <p className="text-red-500">{emailError}</p>}
+          </div>
+
+          {/* Password Field */}
+          <div className="flex flex-col space-y-1">
+            <label htmlFor="password" className="font-medium">Password</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setPasswordErrorMsg('');
+              }}
+              className={`px-3 py-2 rounded bg-white text-black border ${
+                passwordErrorMsg ? 'border-red-500' : 'border-gray-300'
+              } focus:outline-none focus:ring-1 focus:ring-blue-500 ${passwordShake ? 'shake' : ''}`}
+              placeholder="Enter your password"
+            />
+            {passwordErrorMsg && (
+              <div>
+                <p className="text-red-500">{passwordErrorMsg}</p>
+                <Link to="/forgot-password" className="text-blue-300 text-xs hover:underline">
+                  Forgot password?
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
           >
-            <h2 className="text-xl font-semibold text-center">Login</h2>
+            Submit
+          </button>
 
-            {/* Email Field */}
-            <div className="flex flex-col space-y-1">
-              <label htmlFor="email" className="font-medium">Email</label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  setEmailError('');
-                }}
-                className={`px-3 py-2 rounded bg-white text-black border ${
-                  emailError ? 'border-red-500' : 'border-gray-300'
-                } focus:outline-none focus:ring-1 focus:ring-blue-500 ${emailShake ? 'shake' : ''}`}
-                placeholder="e.g. user@example.com"
-              />
-              {emailError && <p className="text-red-500">{emailError}</p>}
-            </div>
-
-            {/* Password Field */}
-            <div className="flex flex-col space-y-1">
-              <label htmlFor="password" className="font-medium">Password</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  setPasswordErrorMsg('');
-                }}
-                className={`px-3 py-2 rounded bg-white text-black border ${
-                  passwordErrorMsg ? 'border-red-500' : 'border-gray-300'
-                } focus:outline-none focus:ring-1 focus:ring-blue-500 ${passwordShake ? 'shake' : ''}`}
-                placeholder="Enter your password"
-              />
-              {passwordErrorMsg && (
-                <div>
-                  <p className="text-red-500">{passwordErrorMsg}</p>
-                  <Link to="/forgot-password" className="text-blue-300 text-xs hover:underline">
-                    Forgot password?
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-            >
-              Submit
-            </button>
-
-            {/* Signup Prompt */}
-            <p className="text-center text-xs">
-              Not registered?{' '}
-              <Link to="/signup" className="text-yellow-300 hover:underline font-medium">
-                Sign up
-              </Link>
-            </p>
-          </form>
-        </div>
-
-        {/* Footer always at bottom */}
+          {/* Signup Prompt */}
+          <p className="text-center text-xs">
+            Not registered?{' '}
+            <Link to="/signup" className="text-yellow-300 hover:underline font-medium">
+              Sign up
+            </Link>
+          </p>
+        </form>
         <Footer />
       </div>
     </>
