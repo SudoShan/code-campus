@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+import Footer from '../components/Footer';
 interface PasswordErrors {
   length: boolean;
   uppercase: boolean;
@@ -18,7 +18,7 @@ const SignupPage: React.FC = () => {
   const [emailShake, setEmailShake] = useState(false);
 
   const [password, setPassword] = useState('');
-  const [passwordErrors, setPasswordErrors] = useState<PasswordErrors>({
+  const [_, setPasswordErrors] = useState<PasswordErrors>({
     length: false,
     uppercase: false,
     specialChar: false,
@@ -202,6 +202,7 @@ const SignupPage: React.FC = () => {
             </Link>
           </p>
         </form>
+        <Footer/>
       </div>
     </>
   );
