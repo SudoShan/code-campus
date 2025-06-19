@@ -113,7 +113,12 @@ const SignupPage: React.FC = () => {
           animation: shake 0.3s ease;
         }
       `}</style>
-
+      <header className="fixed top-0 left-0 w-full z-50 bg-black/30 backdrop-blur-md px-6 py-4 flex justify-between items-center shadow-sm">
+  <Link to="/" className="text-xl font-bold hover:text-yellow-400 transition flex items-center">
+    <span className="text-white">CODE</span>{' '}
+    <span className="text-yellow-400 ml-1">CAMPUS</span>
+  </Link>
+</header>
       <div className="h-screen flex flex-col items-center justify-center bg-[url('./assets/bg.png')] bg-cover bg-center px-4 space-y-6">
         {/* CODE CAMPUS Heading */}
         <h1 className="text-4xl font-bold text-white">
