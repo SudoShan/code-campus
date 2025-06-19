@@ -96,6 +96,7 @@ const LoginPage = () => {
       `}</style>
 
       <div className="grid grid-cols-1 md:grid-cols-[60vw_40vw] h-screen">
+        
         {/* Left Side */}
         <div className="bg-blue-700 flex flex-col justify-center items-center text-center px-6">
           <h1 className="text-white font-extrabold text-[50px] md:text-[70px] leading-none select-none">CODE</h1>
