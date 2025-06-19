@@ -11,7 +11,7 @@ const AppRouter = () => {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage  />} />
-        <Route path="/Login" element={<LoginPage  />} />
+        <Route path="/login" element={<LoginPage  />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/rooms" element={<RoomsPage />} />
         {/* Redirect any unknown routes to Home */}

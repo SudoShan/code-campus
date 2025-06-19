@@ -1,6 +1,6 @@
 import type React from 'react';
 import bgImage from '../assets/bg.png';
-import PopularCard from '../components/PopularCard';
+import MainNavBar from '../components/MainNavBar';
 
 export default function RoomsPage() {
   return (
@@ -14,6 +14,7 @@ export default function RoomsPage() {
       }}
       className="flex items-center justify-center"
     >
+      <MainNavBar />
       <div
         className="backdrop-blur-md bg-white/10 border border-white/30 shadow-lg text-white text-sm space-y-4"
         style={{
@@ -26,7 +27,7 @@ export default function RoomsPage() {
           position: "relative",
         }}
       >
-        <PopularCard backgroundImage={bgImage} PopularCard="React" userCount={1000} rating={4.5} />
+        
       </div>
     </div>
   );
