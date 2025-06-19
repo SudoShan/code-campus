@@ -1,9 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "../pages/LoginPage";
-import SignUpPage from '../pages/SignupPage';
+import SignUpPage from '../pages/SignUpPage';
 import { } from "framer-motion/client";
 import LandingPage from "../pages/LandingPage";
+import RoomsPage from "../pages/RoomsPage";
 
 const AppRouter = () => {
   return (
@@ -12,7 +13,7 @@ const AppRouter = () => {
         <Route path="/" element={<LandingPage  />} />
         <Route path="/Login" element={<LoginPage  />} />
         <Route path="/signup" element={<SignUpPage />} />
-
+        <Route path="/rooms" element={<RoomsPage />} />
         {/* Redirect any unknown routes to Home */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
