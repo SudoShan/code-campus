@@ -120,14 +120,14 @@ export default function AssignmentPage() {
           <button
             ref={toggleButtonRef}
             onClick={() => setSidebarOpen(prev => !prev)}
-            className="text-2xl font-bold text-white hover:text-gray-300"
+            className="text-2xl font-bold text-white hover:text-gray-300 cursor-pointer"
           >
             ☰
           </button>
-          <Link to="/" className="text-xl mx-2.5 font-bold hover:text-yellow-400 transition flex items-center">
-        <span className="text-white">CODE</span>{' '}
-        <span className="text-yellow-400 ml-1">CAMPUS</span>
-        </Link>
+          <Link to="/" className="text-xl mx-2.5 font-bold hover:text-yellow-400 transition flex items-center cursor-pointer">
+            <span className="text-white">CODE</span>{' '}
+            <span className="text-yellow-400 ml-1">CAMPUS</span>
+          </Link>
         </div>
       </header>
 
@@ -154,7 +154,7 @@ export default function AssignmentPage() {
                       setSidebarOpen(false);
                       setShowOutputs(false);
                     }}
-                    className={`block w-full text-left px-3 py-2 rounded ${
+                    className={`block w-full text-left px-3 py-2 rounded cursor-pointer ${
                       activeQuestion === i
                         ? 'bg-[#0E639C] font-bold'
                         : 'hover:bg-[#3E3E42]'
@@ -179,20 +179,20 @@ export default function AssignmentPage() {
             <div className="flex space-x-6 mb-4 border-b border-[#444]">
               <button
                 onClick={() => setActiveTab('question')}
-                className={`pb-2 text-white ${
+                className={`pb-2 cursor-pointer ${
                   activeTab === 'question'
-                    ? 'border-b-2 border-white font-semibold'
-                    : 'text-gray-400'
+                    ? 'border-b-2 border-white font-semibold text-white'
+                    : 'text-gray-400 hover:text-white'
                 }`}
               >
                 Question
               </button>
               <button
                 onClick={() => setActiveTab('testcase')}
-                className={`pb-2 text-white ${
+                className={`pb-2 cursor-pointer ${
                   activeTab === 'testcase'
-                    ? 'border-b-2 border-white font-semibold'
-                    : 'text-gray-400'
+                    ? 'border-b-2 border-white font-semibold text-white'
+                    : 'text-gray-400 hover:text-white'
                 }`}
               >
                 Testcases
@@ -216,7 +216,7 @@ export default function AssignmentPage() {
                     <button
                       key={i}
                       onClick={() => setActiveTestcase(i)}
-                      className={`px-4 py-1 rounded text-sm ${
+                      className={`px-4 py-1 rounded text-sm cursor-pointer ${
                         i === activeTestcase
                           ? 'bg-[#0E639C] text-white'
                           : 'bg-[#2D2D30] text-gray-300 hover:bg-[#3E3E42]'
@@ -270,7 +270,7 @@ export default function AssignmentPage() {
                 id="language"
                 value={language}
                 onChange={handleLanguageChange}
-                className="bg-[#252526] text-white px-2 py-1 rounded border border-[#3C3C3C]"
+                className="bg-[#252526] text-white px-2 py-1 rounded border border-[#3C3C3C] cursor-pointer"
               >
                 <option value="python">Python</option>
                 <option value="cpp">C++</option>
@@ -307,23 +307,20 @@ export default function AssignmentPage() {
             <div className="mt-4 flex space-x-4">
               <button
                 onClick={handleRunOrSubmit}
-                className="bg-yellow-400 text-black font-semibold px-4 py-2 rounded hover:bg-yellow-500"
+                className="bg-yellow-400 text-black font-semibold px-4 py-2 rounded hover:bg-yellow-500 cursor-pointer"
               >
                 Run
               </button>
               <button
                 onClick={handleRunOrSubmit}
-                className="bg-blue-600 text-white font-semibold px-4 py-2 rounded hover:bg-blue-700"
+                className="bg-blue-600 text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 cursor-pointer"
               >
                 Submit
               </button>
             </div>
           </section>
         </main>
-        
       </div>
-      
     </div>
-    
   );
 }

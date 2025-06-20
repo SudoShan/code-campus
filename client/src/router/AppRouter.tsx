@@ -8,8 +8,12 @@ import LandingPage from "../pages/LandingPage";
 import RoomPage from "../pages/RoomPage";
 =======
 import AssignmentPage from "../pages/AssignmentPage";
+<<<<<<< HEAD
 >>>>>>> eff0d4496816647aadd7a5ef9772664b6408ec9a
 
+=======
+import RoomsPage from "../pages/RoomsPage";
+>>>>>>> c23c0fb (bugs resolved)
 const AppRouter = () => {
   return (
     <Router>
@@ -21,6 +25,7 @@ const AppRouter = () => {
         <Route path="/Dashboard/Room" element={<RoomPage />} />
 =======
         <Route path="/AssignmentPage" element={<AssignmentPage />} />
+        <Route path="/rooms" element={<RoomsPage />} />
         
 >>>>>>> eff0d4496816647aadd7a5ef9772664b6408ec9a
 
