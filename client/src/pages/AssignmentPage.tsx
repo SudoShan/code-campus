@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AceEditor from 'react-ace';
-import { Link } from 'react-router-dom';
 
 // Ace modes and theme
 import 'ace-builds/src-noconflict/mode-python';
@@ -9,9 +8,6 @@ import 'ace-builds/src-noconflict/mode-c_cpp';
 import 'ace-builds/src-noconflict/mode-java';
 import 'ace-builds/src-noconflict/theme-tomorrow_night';
 import 'ace-builds/src-noconflict/ext-language_tools';
-
-import bgImage from '../assets/bg.png';
-import Footer from '../components/Footer';
 
 const questions = [
   "Given an integer `n`, return the factorial of `n`.",
@@ -106,30 +102,14 @@ export default function AssignmentPage() {
     <div
       className="flex flex-col h-screen text-white"
       style={{
-        backgroundImage: `url(${bgImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundColor: '#121212',
+        backgroundColor: '#1E1E1E',
         fontFamily: 'Segoe UI, sans-serif',
         userSelect: resizingRef.current ? 'none' : 'auto',
       }}
     >
-      {/* Header */}
-      <header className="flex items-center justify-between bg-[#1E1E1E] px-4 py-3 shadow-md relative z-40">
-        <div className="flex items-center">
-          <button
-            ref={toggleButtonRef}
-            onClick={() => setSidebarOpen(prev => !prev)}
-            className="text-2xl font-bold text-white hover:text-gray-300 cursor-pointer"
-          >
-            ☰
-          </button>
-          <Link to="/" className="text-xl mx-2.5 font-bold hover:text-yellow-400 transition flex items-center cursor-pointer">
-            <span className="text-white">CODE</span>{' '}
-            <span className="text-yellow-400 ml-1">CAMPUS</span>
-          </Link>
-        </div>
-      </header>
+      <div className="w-full h-[50px] bg-transparent"></div> {/* Placeholder for header */}
 
       <div className="flex flex-1 overflow-hidden relative">
         {/* Sidebar */}

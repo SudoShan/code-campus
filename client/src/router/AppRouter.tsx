@@ -22,7 +22,6 @@ const AppRouter = () => {
           <Route path="/rooms" element={<RoomsPage />} />
           <Route path="/Dashboard/Room" element={<RoomPage />} />
           <Route path="/AssignmentPage" element={<AssignmentPage />} />
-          <Route path="/rooms" element={<RoomsPage />} />
         </Route>
 
         

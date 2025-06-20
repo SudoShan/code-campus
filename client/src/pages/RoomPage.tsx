@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 
 const COLORS = {
   background: "#101628", // darker blue
@@ -201,27 +201,7 @@ const RoomPage: React.FC = () => {
 
   return (
     <div style={{ background: COLORS.background, minHeight: "100vh" }}>
-      {/* Header */}
-      <header
-        style={{
-          background: COLORS.header,
-          color: COLORS.white,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          height: 56,
-          padding: "0 22px",
-        }}
-      >
-        <div style={{ fontSize: 26, fontWeight: 800, fontFamily: "monospace" }}>
-          CODE<span style={{ color: COLORS.accentYellow }}>CAMPUS</span>
-        </div>
-        <nav style={{ display: "flex", gap: 20, alignItems: "center", fontSize: 16 }}>
-          <span>≡</span>
-          <span>✉️</span>
-          <span>👤</span>
-        </nav>
-      </header>
+      <div className="w-full h-[50px] bg-transparent"></div> {/* Spacer for header */}
 
       {/* Room Info */}
       <div
