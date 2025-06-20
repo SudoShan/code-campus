@@ -8,7 +8,8 @@ const COLORS = {
   white: "#ffffff",
   tabInactive: "#252c44",
   borderGray: "#3a415a",
-  glassBackground: "rgba(28, 37, 68, 0.6)", // transparent glass effect
+  lightgray: "rgb(173, 173, 173)",
+  glassBackground: "rgba(255, 255, 255, 0.09)", // transparent glass effect
 };
 
 type Assignment = {
@@ -146,6 +147,7 @@ const AnnouncementSection: React.FC<{ extraAnnouncements?: Announcement[] }> = (
     <div
       style={{
         background: COLORS.glassBackground,
+        minHeight: "65vh",
         border: `1px solid ${COLORS.borderGray}`,
         borderRadius: 16,
         padding: 20,
@@ -282,7 +284,7 @@ const RoomPage: React.FC = () => {
               style={{
                 flex: 1,
                 background: activeTab === "due" ? COLORS.tabBlue : COLORS.tabInactive,
-                color: activeTab === "due" ? COLORS.accentYellow : COLORS.white,
+                color: activeTab === "due" ? COLORS.accentYellow : COLORS.lightgray,
                 border: "none",
                 borderRadius: 8,
                 padding: "10px 0",
@@ -297,7 +299,7 @@ const RoomPage: React.FC = () => {
               style={{
                 flex: 1,
                 background: activeTab === "open" ? COLORS.tabBlue : COLORS.tabInactive,
-                color: activeTab === "open" ? COLORS.accentYellow : COLORS.white,
+                color: activeTab === "open" ? COLORS.accentYellow : COLORS.lightgray,
                 border: "none",
                 borderRadius: 8,
                 padding: "10px 0",
