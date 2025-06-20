@@ -4,6 +4,10 @@ import LoginPage from "../pages/LoginPage";
 import SignUpPage from '../pages/SignUpPage';
 import { } from "framer-motion/client";
 import LandingPage from "../pages/LandingPage";
+import RoomPage from "../pages/RoomPage"
+import AssignmentPage from "../pages/AssignmentPage";
+
+
 import RoomsPage from "../pages/RoomsPage";
 import MainLayout from "../layouts/MainLayout";
 
@@ -16,7 +20,14 @@ const AppRouter = () => {
         <Route path="/signup" element={<SignUpPage />} />
         <Route element={<MainLayout />}>
           <Route path="/rooms" element={<RoomsPage />} />
+          <Route path="/Dashboard/Room" element={<RoomPage />} />
+          <Route path="/AssignmentPage" element={<AssignmentPage />} />
+          <Route path="/rooms" element={<RoomsPage />} />
         </Route>
+
+        
+
+
         {/* Redirect any unknown routes to Home */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

@@ -14,3 +14,9 @@
     background-color: #f9f9f9;
   }
 }
+
+.ace_gutter {
+  background: transparent !important; /* Remove background */
+  border-right: none !important;     /* Optional: remove border line */
+}
+
