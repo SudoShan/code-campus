@@ -1,8 +1,160 @@
 import type React from 'react';
 import bgImage from '../assets/bg.png';
-import MainNavBar from '../components/MainNavBar';
+import PopularCard from '../components/PopularCard';
+import YourRoomCard from '../components/YourRoomCard';
+import Footer from '../components/Footer';
+import c1 from '../assets/Cards/1.jpg';
+import c2 from '../assets/Cards/2.jpg';
+import c3 from '../assets/Cards/3.jpg';
+import c6 from '../assets/Cards/6.jpg';
+import c4 from '../assets/Cards/4.jpg';
+import c5 from '../assets/Cards/5.jpg';
+import c7 from '../assets/Cards/7.jpg';
+import c8 from '../assets/Cards/8.jpg';
+import c9 from '../assets/Cards/9.jpg';
+
+// Room data with static backgroundImage for each
+const rooms = [
+  {
+    roomname: "Math Club",
+    userCount: 1200,
+    rating: 4.7,
+    desc: "Discuss math problems and solutions.",
+    backgroundImage: c6
+  },
+  {
+    roomname: "Science Hub",
+    userCount: 950,
+    rating: 4.5,
+    desc: "Explore the wonders of science.",
+    backgroundImage: c2
+  },
+  {
+    roomname: "History Circle",
+    userCount: 800,
+    rating: 4.3,
+    desc: "Dive into world history topics.",
+    backgroundImage: "/assets/Cards/3.jpg"
+  },
+  {
+    roomname: "Code Masters",
+    userCount: 2100,
+    rating: 4.9,
+    desc: "Sharpen your coding skills.",
+    backgroundImage: c1
+  },
+  {
+    roomname: "Bookworms",
+    userCount: 670,
+    rating: 4.2,
+    desc: "Share and review your favorite books.",
+    backgroundImage: c3
+  },
+  {
+    roomname: "Art Studio",
+    userCount: 540,
+    rating: 4.1,
+    desc: "Showcase and critique artworks.",
+    backgroundImage: c2
+  },
+  {
+    roomname: "Music Lounge",
+    userCount: 1300,
+    rating: 4.6,
+    desc: "Jam and discuss music.",
+    backgroundImage: c3
+  },
+  {
+    roomname: "Language Lab",
+    userCount: 900,
+    rating: 4.4,
+    desc: "Practice and learn new languages.",
+    backgroundImage: c2
+  },
+  {
+    roomname: "Chess Arena",
+    userCount: 400,
+    rating: 4.0,
+    desc: "Challenge others to chess matches.",
+    backgroundImage: c3
+  },
+  {
+    roomname: "Fitness Zone",
+    userCount: 1100,
+    rating: 4.5,
+    desc: "Share workouts and tips.",
+    backgroundImage: c1
+  },
+  {
+    roomname: "Movie Buffs",
+    userCount: 750,
+    rating: 4.3,
+    desc: "Discuss the latest movies.",
+    backgroundImage: c3
+  },
+  {
+    roomname: "Tech Talk",
+    userCount: 1600,
+    rating: 4.8,
+    desc: "All about technology trends.",
+    backgroundImage: c2
+  }
+];
+
+// Example owner rooms (replace with backend data later)
+const ownerRooms = [
+  {
+    roomName: "My Algorithms Class",
+    backgroundImage: c7,
+    link: "/rooms/algorithms"
+  },
+  {
+    roomName: "Project X Team",
+    backgroundImage: c2,
+    link: "/rooms/project-x"
+  },
+  {
+    roomName: "Study Buddies",
+    backgroundImage: c4,
+    link: "/rooms/study-buddies"
+  }
+];
+
+// Example participant rooms (replace with backend data later)
+const participantRooms = [
+  {
+    roomName: "Open Source Collab",
+    backgroundImage: c5,
+    link: "/rooms/opensource"
+  },
+  {
+    roomName: "Math Night",
+    backgroundImage: c9,
+    link: "/rooms/math-night"
+  },
+  {
+    roomName: "Book Club",
+    backgroundImage: c8,
+    link: "/rooms/book-club"
+  },
+  {
+    roomName: "Fitness Friends",
+    backgroundImage: c4,
+    link: "/rooms/fitness-friends"
+  },
+  {
+    roomName: "Music Makers",
+    backgroundImage: c7,
+    link: "/rooms/music-makers"
+  }
+];
 
 export default function RoomsPage() {
+  // Pick 4 most popular rooms (by userCount)
+  const popularRooms = [...rooms]
+    .sort((a, b) => b.userCount - a.userCount)
+    .slice(0, 4);
+
   return (
     <div
       style={{
@@ -14,9 +166,8 @@ export default function RoomsPage() {
       }}
       className="flex items-center justify-center"
     >
-      <MainNavBar />
       <div
-        className="backdrop-blur-md bg-white/10 border border-white/30 shadow-lg text-white text-sm space-y-4"
+        className="backdrop-blur-md bg-black/30 border border-white/30 shadow-lg text-white text-sm space-y-4"
         style={{
           width: "100vw",
           minHeight: "100vh",
@@ -27,7 +178,235 @@ export default function RoomsPage() {
           position: "relative",
         }}
       >
-        
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "32px 16px" }}>
+          {/* Popular Rooms */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 24,
+              marginTop: 40,
+            }}
+          >
+            <h2 style={{
+              fontWeight: 700,
+              fontSize: 24,
+              color: "#fff",
+              margin: 0
+            }}>
+              Popular Rooms
+            </h2>
+            <button
+              style={{
+                background: "#e0e7ff", // light blue
+                color: "#2563eb",      // blue-600
+                fontWeight: 600,
+                fontSize: 16,
+                border: "none",
+                borderRadius: 9999,
+                padding: "8px 28px",
+                cursor: "pointer",
+                transition: "background 0.15s, color 0.15s, box-shadow 0.15s",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.07)"
+              }}
+              onMouseOver={e => {
+                (e.currentTarget as HTMLButtonElement).style.background = "#dbeafe"; // blue-100
+                (e.currentTarget as HTMLButtonElement).style.color = "#1d4ed8";     // blue-700
+              }}
+              onMouseOut={e => {
+                (e.currentTarget as HTMLButtonElement).style.background = "#e0e7ff";
+                (e.currentTarget as HTMLButtonElement).style.color = "#2563eb";
+              }}
+              onMouseDown={e => {
+                (e.currentTarget as HTMLButtonElement).style.background = "#93c5fd"; // blue-300
+                (e.currentTarget as HTMLButtonElement).style.color = "#1e40af";     // blue-800
+              }}
+              onMouseUp={e => {
+                (e.currentTarget as HTMLButtonElement).style.background = "#dbeafe";
+                (e.currentTarget as HTMLButtonElement).style.color = "#1d4ed8";
+              }}
+            >
+              Explore
+            </button>
+          </div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gap: 14,
+              alignItems: "stretch",
+              gridAutoRows: "1fr"
+            }}
+          >
+            {/* Render 4 popular cards */}
+            {popularRooms.map(room => (
+              <PopularCard
+                key={room.roomname}
+                backgroundImage={room.backgroundImage}
+                PopularCard={room.roomname}
+                userCount={room.userCount}
+                rating={room.rating}
+                description={room.desc}
+              />
+            ))}
+          </div>
+
+          {/* Owner Rooms */}
+          <div style={{ marginTop: 48 }}>
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 16
+            }}>
+              <h3 style={{
+                fontWeight: 700,
+                fontSize: 24,
+                color: "#fff",
+                margin: 0
+              }}>
+                Rooms You Own
+              </h3>
+              <button
+                style={{
+                  background: "#e0e7ff", // light blue
+                  color: "#2563eb",      // blue-600
+                  fontWeight: 600,
+                  fontSize: 16,
+                  border: "none",
+                  borderRadius: 9999,
+                  padding: "8px 28px",
+                  cursor: "pointer",
+                  transition: "background 0.15s, color 0.15s, box-shadow 0.15s",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.07)"
+                }}
+                onMouseOver={e => {
+                  (e.currentTarget as HTMLButtonElement).style.background = "#dbeafe"; // blue-100
+                  (e.currentTarget as HTMLButtonElement).style.color = "#1d4ed8";     // blue-700
+                }}
+                onMouseOut={e => {
+                  (e.currentTarget as HTMLButtonElement).style.background = "#e0e7ff";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#2563eb";
+                }}
+                onMouseDown={e => {
+                  (e.currentTarget as HTMLButtonElement).style.background = "#93c5fd"; // blue-300
+                  (e.currentTarget as HTMLButtonElement).style.color = "#1e40af";     // blue-800
+                }}
+                onMouseUp={e => {
+                  (e.currentTarget as HTMLButtonElement).style.background = "#dbeafe";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#1d4ed8";
+                }}
+              >
+                Create
+              </button>
+            </div>
+            {ownerRooms.length > 0 ? (
+              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                {ownerRooms.map(room => (
+                  <YourRoomCard
+                    key={room.roomName}
+                    roomName={room.roomName}
+                    backgroundImage={room.backgroundImage}
+                    link={room.link}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div style={{
+                color: "#cbd5e1",
+                fontSize: 16,
+                fontWeight: 500,
+                padding: "12px 0 24px 0"
+              }}>
+                You don't own any rooms yet. Create one to get started!
+              </div>
+            )}
+          </div>
+
+          {/* Participant Rooms */}
+          <div style={{ marginTop: 40 }}>
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 16
+            }}>
+              <h3 style={{
+                fontWeight: 700,
+                fontSize: 24,
+                color: "#fff",
+                margin: 0
+              }}>
+                Rooms You're In
+              </h3>
+              <button
+                style={{
+                  background: "#e0e7ff", // light blue
+                  color: "#2563eb",      // blue-600
+                  fontWeight: 600,
+                  fontSize: 16,
+                  border: "none",
+                  borderRadius: 9999,
+                  padding: "8px 28px",
+                  cursor: "pointer",
+                  transition: "background 0.15s, color 0.15s, box-shadow 0.15s",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.07)"
+                }}
+                onMouseOver={e => {
+                  (e.currentTarget as HTMLButtonElement).style.background = "#dbeafe"; // blue-100
+                  (e.currentTarget as HTMLButtonElement).style.color = "#1d4ed8";     // blue-700
+                }}
+                onMouseOut={e => {
+                  (e.currentTarget as HTMLButtonElement).style.background = "#e0e7ff";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#2563eb";
+                }}
+                onMouseDown={e => {
+                  (e.currentTarget as HTMLButtonElement).style.background = "#93c5fd"; // blue-300
+                  (e.currentTarget as HTMLButtonElement).style.color = "#1e40af";     // blue-800
+                }}
+                onMouseUp={e => {
+                  (e.currentTarget as HTMLButtonElement).style.background = "#dbeafe";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#1d4ed8";
+                }}
+              >
+                Join
+              </button>
+            </div>
+            {participantRooms.length > 0 ? (
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(2, 1fr)",
+                  gap: 12,
+                  // Responsive: 1 column on small screens
+                  ...(window.innerWidth <= 600
+                    ? { gridTemplateColumns: "1fr" }
+                    : {})
+                }}
+              >
+                {participantRooms.map(room => (
+                  <YourRoomCard
+                    key={room.roomName}
+                    roomName={room.roomName}
+                    backgroundImage={room.backgroundImage}
+                    link={room.link}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div style={{
+                color: "#cbd5e1",
+                fontSize: 16,
+                fontWeight: 500,
+                padding: "12px 0 24px 0"
+              }}>
+                You are not part of any rooms yet. Join one to start collaborating!
+              </div>
+            )}
+          </div>
+        </div>
+        <Footer />
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ type PopularCardProps = {
   PopularCard: string;
   userCount: number;
   rating: number; // e.g., 4.5
+  description?: string; // Added description prop
 };
 
 function formatUserCount(count: number) {
@@ -56,11 +57,17 @@ function renderStars(rating: number) {
   return stars;
 }
 
-const PopularCard: React.FC<PopularCardProps> = ({ backgroundImage, PopularCard, userCount, rating }) => (
+const PopularCard: React.FC<PopularCardProps> = ({
+  backgroundImage,
+  PopularCard,
+  userCount,
+  rating,
+  description // Added description prop
+}) => (
   <div
     style={{
       position: "relative",
-      width: 240,
+      width: 280,
       height: 140,
       borderRadius: 16,
       overflow: "hidden",
@@ -71,16 +78,38 @@ const PopularCard: React.FC<PopularCardProps> = ({ backgroundImage, PopularCard,
       boxShadow: "0 2px 8px rgba(0,0,0,0.15)"
     }}
   >
-    {/* Top-left name */}
+    {/* Top-left name and description */}
     <div style={{
       position: "absolute",
       top: 16,
       left: 16,
-      fontWeight: "bold",
-      fontSize: 20,
+      right: 16,
+      display: "flex",
+      flexDirection: "column",
+      gap: 2,
       textShadow: "0 1px 4px rgba(0,0,0,0.5)"
     }}>
-      {PopularCard}
+      <span style={{
+        fontWeight: "bold",
+        fontSize: 20,
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis"
+      }}>
+        {PopularCard}
+      </span>
+      {description && (
+        <span style={{
+          fontSize: 13,
+          fontWeight: 400,
+          opacity: 0.85,
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis"
+        }}>
+          {description}
+        </span>
+      )}
     </div>
     {/* Bottom info */}
     <div style={{

@@ -5,6 +5,7 @@ import SignUpPage from '../pages/SignUpPage';
 import { } from "framer-motion/client";
 import LandingPage from "../pages/LandingPage";
 import RoomsPage from "../pages/RoomsPage";
+import MainLayout from "../layouts/MainLayout";
 
 const AppRouter = () => {
   return (
@@ -13,7 +14,9 @@ const AppRouter = () => {
         <Route path="/" element={<LandingPage  />} />
         <Route path="/login" element={<LoginPage  />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/rooms" element={<RoomsPage />} />
+        <Route element={<MainLayout />}>
+          <Route path="/rooms" element={<RoomsPage />} />
+        </Route>
         {/* Redirect any unknown routes to Home */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
