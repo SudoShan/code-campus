@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 const LoginPage: React.FC = () => {
@@ -10,6 +10,8 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const [passwordErrorMsg, setPasswordErrorMsg] = useState('');
   const [passwordShake, setPasswordShake] = useState(false);
+
+  const navigate = useNavigate();
 
   const validateEmail = (email: string): string => {
     if (!email) return 'Email is mandatory';
@@ -31,7 +33,7 @@ const LoginPage: React.FC = () => {
     setPasswordShake(!!pwdErr);
 
     if (!emailErr && !pwdErr) {
-      alert('Login successful!');
+      navigate('/rooms'); // Redirect to rooms page on successful login
     }
   };
 
@@ -131,8 +133,9 @@ const LoginPage: React.FC = () => {
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+            
           >
-            Submit
+            Login
           </button>
 
           {/* Signup Prompt */}
