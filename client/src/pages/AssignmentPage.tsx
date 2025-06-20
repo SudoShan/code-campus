@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import AceEditor from 'react-ace';
 
 // Ace modes and theme
@@ -112,41 +111,67 @@ export default function AssignmentPage() {
       <div className="w-full h-[50px] bg-transparent"></div> {/* Placeholder for header */}
 
       <div className="flex flex-1 overflow-hidden relative">
-        {/* Sidebar */}
-        <AnimatePresence>
-          {sidebarOpen && (
-            <motion.aside
-              ref={sidebarRef}
-              initial={{ x: -250 }}
-              animate={{ x: 0 }}
-              exit={{ x: -250 }}
-              transition={{ type: 'tween' }}
-              className="absolute top-0 left-0 h-full w-64 bg-[#252526] text-white shadow-lg z-30 p-4"
-            >
-              <h2 className="text-lg font-bold mb-4">Questions</h2>
-              <div className="space-y-2">
-                {questions.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      setActiveQuestion(i);
-                      setActiveTab('question');
-                      setSidebarOpen(false);
-                      setShowOutputs(false);
-                    }}
-                    className={`block w-full text-left px-3 py-2 rounded cursor-pointer ${
-                      activeQuestion === i
-                        ? 'bg-[#0E639C] font-bold'
-                        : 'hover:bg-[#3E3E42]'
-                    }`}
-                  >
-                    Question {i + 1}
-                  </button>
-                ))}
-              </div>
-            </motion.aside>
-          )}
-        </AnimatePresence>
+        {/* Permanent horizontal question bar */}
+        <div
+          style={{
+            width: 40,
+            minWidth: 40,
+            height: '100%',
+            background: '#232323',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            paddingTop: 0,
+            zIndex: 20,
+            borderRight: '1px solid #333',
+            position: 'relative',
+            overflowY: 'auto',
+            scrollbarWidth: 'none', // Firefox
+            msOverflowStyle: 'none', // IE/Edge
+          }}
+          className="hide-scrollbar"
+        >
+          <div style={{ paddingTop: 12, width: '100%' }}>
+            {questions.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  setActiveQuestion(i);
+                  setActiveTab('question');
+                  setShowOutputs(false);
+                }}
+                style={{
+                  width: 30,
+                  height: 30,
+                  marginBottom: 6,
+                  marginLeft: 4,
+                  borderRadius: 6,
+                  background: activeQuestion === i ? '#facc15' : 'transparent',
+                  color: activeQuestion === i ? '#222' : '#fff',
+                  fontWeight: activeQuestion === i ? 700 : 500,
+                  border: 'none',
+                  outline: 'none',
+                  cursor: 'pointer',
+                  transition: 'background 0.15s, color 0.15s',
+                  boxShadow: activeQuestion === i ? '0 2px 8px #facc1555' : 'none',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 15
+                }}
+                onMouseOver={e => {
+                  if (activeQuestion !== i) e.currentTarget.style.background = '#3E3E42';
+                }}
+                onMouseOut={e => {
+                  if (activeQuestion !== i) e.currentTarget.style.background = 'transparent';
+                }}
+                title={`Question ${i + 1}`}
+              >
+                {i + 1}
+              </button>
+            ))}
+          </div>
+        </div>
 
         {/* Main Content */}
         <main className="flex flex-1" style={{ userSelect: 'auto' }}>
@@ -244,13 +269,13 @@ export default function AssignmentPage() {
           >
             <div className="mb-2 flex items-center">
               <label htmlFor="language" className="mr-2 text-yellow-400 font-semibold">
-                Language:
+                Language
               </label>
               <select
                 id="language"
                 value={language}
                 onChange={handleLanguageChange}
-                className="bg-[#252526] text-white px-2 py-1 rounded border border-[#3C3C3C] cursor-pointer"
+                className="bg-[#252526] text-white px-2 py-0.5 rounded border border-[#3C3C3C] cursor-pointer"
               >
                 <option value="python">Python</option>
                 <option value="cpp">C++</option>
@@ -287,13 +312,13 @@ export default function AssignmentPage() {
             <div className="mt-4 flex space-x-4">
               <button
                 onClick={handleRunOrSubmit}
-                className="bg-yellow-400 text-black font-semibold px-4 py-2 rounded hover:bg-yellow-500 cursor-pointer"
+                className="bg-yellow-400 text-black font-semibold px-4 py-1 rounded hover:bg-yellow-500 cursor-pointer"
               >
                 Run
               </button>
               <button
                 onClick={handleRunOrSubmit}
-                className="bg-blue-600 text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 cursor-pointer"
+                className="bg-blue-600 text-white font-semibold px-4 py-1 rounded hover:bg-blue-700 cursor-pointer"
               >
                 Submit
               </button>
@@ -304,3 +329,14 @@ export default function AssignmentPage() {
     </div>
   );
 }
+
+/* Add this CSS somewhere global or in the file */
+/*
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+*/
