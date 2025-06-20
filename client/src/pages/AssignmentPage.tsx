@@ -267,10 +267,7 @@ export default function AssignmentPage() {
             className="flex flex-col p-4 bg-[#1E1E1E]"
             style={{ width: `${100 - leftPanelWidthPercent}%` }}
           >
-            <div className="mb-2 flex items-center">
-              <label htmlFor="language" className="mr-2 text-yellow-400 font-semibold">
-                Language
-              </label>
+            <div className="mb-2 flex items-center justify-end">
               <select
                 id="language"
                 value={language}
