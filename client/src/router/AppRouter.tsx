@@ -6,10 +6,9 @@ import { } from "framer-motion/client";
 import LandingPage from "../pages/LandingPage";
 import RoomPage from "../pages/RoomPage"
 import AssignmentPage from "../pages/AssignmentPage";
-
-
 import RoomsPage from "../pages/RoomsPage";
 import MainLayout from "../layouts/MainLayout";
+import ExplorePage from "../pages/ExplorePage";
 
 const AppRouter = () => {
   return (
@@ -22,6 +21,7 @@ const AppRouter = () => {
           <Route path="/rooms" element={<RoomsPage />} />
           <Route path="/Dashboard/Room" element={<RoomPage />} />
           <Route path="/AssignmentPage" element={<AssignmentPage />} />
+          <Route path="/explore" element={<ExplorePage />} />
         </Route>
 
         

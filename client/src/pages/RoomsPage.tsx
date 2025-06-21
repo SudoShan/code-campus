@@ -3,6 +3,7 @@ import bgImage from '../assets/bg.png';
 import PopularCard from '../components/PopularCard';
 import YourRoomCard from '../components/YourRoomCard';
 import Footer from '../components/Footer';
+import { useNavigate } from 'react-router-dom';
 import c1 from '../assets/Cards/1.jpg';
 import c2 from '../assets/Cards/2.jpg';
 import c3 from '../assets/Cards/3.jpg';
@@ -14,90 +15,114 @@ import c8 from '../assets/Cards/8.jpg';
 import c9 from '../assets/Cards/9.jpg';
 
 // Room data with static backgroundImage for each
-const rooms = [
+export const rooms = [
   {
-    roomname: "Math Club",
+    roomname: "Python Beginners",
     userCount: 1200,
     rating: 4.7,
-    desc: "Discuss math problems and solutions.",
-    backgroundImage: c6
+    desc: "Learn Python from scratch and solve beginner problems.",
+    backgroundImage: c6,
+    isPrivate: false,
+    technologies: ["Python"]
   },
   {
-    roomname: "Science Hub",
+    roomname: "Flask Web Dev",
     userCount: 950,
     rating: 4.5,
-    desc: "Explore the wonders of science.",
-    backgroundImage: c2
+    desc: "Build web apps using Flask and Python.",
+    backgroundImage: c2,
+    isPrivate: false,
+    technologies: ["Python", "Flask"]
   },
   {
-    roomname: "History Circle",
+    roomname: "React Learners",
     userCount: 800,
     rating: 4.3,
-    desc: "Dive into world history topics.",
-    backgroundImage: "/assets/Cards/3.jpg"
+    desc: "Master React.js and frontend development.",
+    backgroundImage: c3,
+    isPrivate: true,
+    technologies: ["JavaScript", "React"]
   },
   {
-    roomname: "Code Masters",
+    roomname: "Competitive Coding",
     userCount: 2100,
     rating: 4.9,
-    desc: "Sharpen your coding skills.",
-    backgroundImage: c1
+    desc: "Sharpen your coding skills for contests.",
+    backgroundImage: c1,
+    isPrivate: false,
+    technologies: ["C++", "Python", "Algorithms"]
   },
   {
-    roomname: "Bookworms",
+    roomname: "Data Science Hub",
     userCount: 670,
     rating: 4.2,
-    desc: "Share and review your favorite books.",
-    backgroundImage: c3
+    desc: "Discuss data science, ML, and AI projects.",
+    backgroundImage: c3,
+    isPrivate: true,
+    technologies: ["Python", "Pandas", "NumPy", "scikit-learn"]
   },
   {
-    roomname: "Art Studio",
+    roomname: "Java Masters",
     userCount: 540,
     rating: 4.1,
-    desc: "Showcase and critique artworks.",
-    backgroundImage: c2
+    desc: "Deep dive into Java and OOP concepts.",
+    backgroundImage: c2,
+    isPrivate: false,
+    technologies: ["Java"]
   },
   {
-    roomname: "Music Lounge",
+    roomname: "Fullstack Projects",
     userCount: 1300,
     rating: 4.6,
-    desc: "Jam and discuss music.",
-    backgroundImage: c3
+    desc: "Collaborate on fullstack web projects.",
+    backgroundImage: c3,
+    isPrivate: false,
+    technologies: ["Node.js", "React", "MongoDB", "Express"]
   },
   {
-    roomname: "Language Lab",
+    roomname: "Django Developers",
     userCount: 900,
     rating: 4.4,
-    desc: "Practice and learn new languages.",
-    backgroundImage: c2
+    desc: "Build robust apps with Django.",
+    backgroundImage: c2,
+    isPrivate: true,
+    technologies: ["Python", "Django"]
   },
   {
-    roomname: "Chess Arena",
+    roomname: "Android Studio",
     userCount: 400,
     rating: 4.0,
-    desc: "Challenge others to chess matches.",
-    backgroundImage: c3
+    desc: "Android app development and Kotlin.",
+    backgroundImage: c3,
+    isPrivate: false,
+    technologies: ["Kotlin", "Android Studio"]
   },
   {
-    roomname: "Fitness Zone",
+    roomname: "LeetCode Warriors",
     userCount: 1100,
     rating: 4.5,
-    desc: "Share workouts and tips.",
-    backgroundImage: c1
+    desc: "Daily LeetCode problem solving.",
+    backgroundImage: c1,
+    isPrivate: false,
+    technologies: ["Python", "Java", "C++"]
   },
   {
-    roomname: "Movie Buffs",
+    roomname: "Open Source Guild",
     userCount: 750,
     rating: 4.3,
-    desc: "Discuss the latest movies.",
-    backgroundImage: c3
+    desc: "Contribute to open source projects.",
+    backgroundImage: c3,
+    isPrivate: false,
+    technologies: ["Git", "GitHub", "Any"]
   },
   {
-    roomname: "Tech Talk",
+    roomname: "TypeScript Tribe",
     userCount: 1600,
     rating: 4.8,
-    desc: "All about technology trends.",
-    backgroundImage: c2
+    desc: "TypeScript and modern JS best practices.",
+    backgroundImage: c2,
+    isPrivate: true,
+    technologies: ["TypeScript", "JavaScript"]
   }
 ];
 
@@ -155,6 +180,8 @@ export default function RoomsPage() {
     .sort((a, b) => b.userCount - a.userCount)
     .slice(0, 4);
 
+  const navigate = useNavigate();
+
   return (
     <div
       style={{
@@ -210,6 +237,7 @@ export default function RoomsPage() {
                 transition: "background 0.15s, color 0.15s, box-shadow 0.15s",
                 boxShadow: "0 2px 8px rgba(0,0,0,0.07)"
               }}
+              onClick={() => navigate("/explore")}
               onMouseOver={e => {
                 (e.currentTarget as HTMLButtonElement).style.background = "#dbeafe"; // blue-100
                 (e.currentTarget as HTMLButtonElement).style.color = "#1d4ed8";     // blue-700
@@ -406,6 +434,7 @@ export default function RoomsPage() {
             )}
           </div>
         </div>
+        <div></div>
         <Footer />
       </div>
     </div>
