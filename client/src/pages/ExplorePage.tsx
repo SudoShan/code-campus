@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ExploreRoomCard from "../components/ExploreRoomCard";
 import { rooms } from "./RoomsPage";
-import { FaSortAlphaDown, FaSortNumericDown, FaStar } from "react-icons/fa";
+import { FaSortAlphaDown, FaSortNumericDown, FaStar, FaSearch } from "react-icons/fa";
 
 // Collect all unique technologies
 const allTechnologies = Array.from(
@@ -26,6 +26,8 @@ export default function ExplorePage() {
   const [userCountFilter, setUserCountFilter] = useState(0);
   const [techFilters, setTechFilters] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState("rating");
+  const [search, setSearch] = useState("");
+  const [searchActive, setSearchActive] = useState(false);
 
   // Filtering logic
   const filteredRooms = rooms.filter(room => {
@@ -34,6 +36,11 @@ export default function ExplorePage() {
     if (userCountFilter && room.userCount < userCountFilter) return false;
     // OR logic for tech filters
     if (techFilters.length > 0 && !room.technologies.some(t => techFilters.includes(t))) return false;
+    // Search filter
+    if (search.trim() &&
+      !room.roomname.toLowerCase().includes(search.trim().toLowerCase()) &&
+      !room.desc.toLowerCase().includes(search.trim().toLowerCase())
+    ) return false;
     return true;
   });
 
@@ -47,7 +54,7 @@ export default function ExplorePage() {
   }
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", background: `url(/assets/bg.png) center/cover no-repeat, #18181b`, overflow: 'hidden' }}>
+    <div style={{ display: "flex", minHeight: "100vh", background: '#18181b', overflow: 'hidden' }}>
       {/* Left Filters */}
       <aside
         style={{
@@ -151,9 +158,32 @@ export default function ExplorePage() {
       {/* Right: Results */}
       <main style={{ flex: 1, padding: 36, paddingLeft: 260, height: 'calc(100vh - 60px)', overflowY: 'auto', boxSizing: 'border-box', position: 'relative', marginTop: 40 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
-          <h2 style={{ fontWeight: 700, fontSize: 28, color: "#fff", margin: 0 }}>Explore Rooms</h2>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ color: "#e5e7eb", fontWeight: 500, fontSize: 15, marginRight: 4 }}>Sort by:</span>
+          <h2 style={{ fontWeight: 700, fontSize: 28, color: "#fff", margin: 0 }}>Explore</h2>
+          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+              <FaSearch style={{ position: 'absolute', left: 10, top: 8, color: '#e5e7eb', fontSize: 16, pointerEvents: 'none' }} />
+              <input
+                type="text"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                onFocus={() => setSearchActive(true)}
+                onBlur={() => setSearchActive(false)}
+                placeholder="Search rooms..."
+                style={{
+                  padding: '3px 12px 3px 32px',
+                  borderRadius: 8,
+                  border: '1px solid #444',
+                  background: '#232323',
+                  color: '#fff',
+                  fontSize: 15,
+                  outline: 'none',
+                  boxShadow: searchActive ? '0 0px 0 2px #facc15' : 'none',
+                  transition: 'box-shadow 0.18s',
+                  width: 250
+                }}
+              />
+            </div>
+            <span style={{ color: "#e5e7eb", fontWeight: 500, fontSize: 15, marginRight: 4 }}>Sort by</span>
             <select
               value={sortBy}
               onChange={e => setSortBy(e.target.value)}
