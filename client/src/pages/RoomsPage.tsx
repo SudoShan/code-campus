@@ -23,7 +23,8 @@ export const rooms = [
     desc: "Learn Python from scratch and solve beginner problems.",
     backgroundImage: c6,
     isPrivate: false,
-    technologies: ["Python"]
+    technologies: ["Python"],
+    ownerUsername: "alice"
   },
   {
     roomname: "Flask Web Dev",
@@ -32,7 +33,8 @@ export const rooms = [
     desc: "Build web apps using Flask and Python.",
     backgroundImage: c2,
     isPrivate: false,
-    technologies: ["Python", "Flask"]
+    technologies: ["Python", "Flask"],
+    ownerUsername: "bob"
   },
   {
     roomname: "React Learners",
@@ -41,7 +43,9 @@ export const rooms = [
     desc: "Master React.js and frontend development.",
     backgroundImage: c3,
     isPrivate: true,
-    technologies: ["JavaScript", "React"]
+    technologies: ["JavaScript", "React"],
+    ownerUsername: "carol",
+    code: "A1B2C3"
   },
   {
     roomname: "Competitive Coding",
@@ -50,7 +54,8 @@ export const rooms = [
     desc: "Sharpen your coding skills for contests.",
     backgroundImage: c1,
     isPrivate: false,
-    technologies: ["C++", "Python", "Algorithms"]
+    technologies: ["C++", "Python", "Algorithms"],
+    ownerUsername: "dave"
   },
   {
     roomname: "Data Science Hub",
@@ -59,7 +64,9 @@ export const rooms = [
     desc: "Discuss data science, ML, and AI projects.",
     backgroundImage: c3,
     isPrivate: true,
-    technologies: ["Python", "Pandas", "NumPy", "scikit-learn"]
+    technologies: ["Python", "Pandas", "NumPy", "scikit-learn"],
+    ownerUsername: "eve",
+    code: "X9Y8Z7"
   },
   {
     roomname: "Java Masters",
@@ -68,7 +75,8 @@ export const rooms = [
     desc: "Deep dive into Java and OOP concepts.",
     backgroundImage: c2,
     isPrivate: false,
-    technologies: ["Java"]
+    technologies: ["Java"],
+    ownerUsername: "frank"
   },
   {
     roomname: "Fullstack Projects",
@@ -77,7 +85,8 @@ export const rooms = [
     desc: "Collaborate on fullstack web projects.",
     backgroundImage: c3,
     isPrivate: false,
-    technologies: ["Node.js", "React", "MongoDB", "Express"]
+    technologies: ["Node.js", "React", "MongoDB", "Express"],
+    ownerUsername: "grace"
   },
   {
     roomname: "Django Developers",
@@ -86,7 +95,9 @@ export const rooms = [
     desc: "Build robust apps with Django.",
     backgroundImage: c2,
     isPrivate: true,
-    technologies: ["Python", "Django"]
+    technologies: ["Python", "Django"],
+    ownerUsername: "hank",
+    code: "Q2W3E4"
   },
   {
     roomname: "Android Studio",
@@ -95,7 +106,8 @@ export const rooms = [
     desc: "Android app development and Kotlin.",
     backgroundImage: c3,
     isPrivate: false,
-    technologies: ["Kotlin", "Android Studio"]
+    technologies: ["Kotlin", "Android Studio"],
+    ownerUsername: "irene"
   },
   {
     roomname: "LeetCode Warriors",
@@ -104,7 +116,8 @@ export const rooms = [
     desc: "Daily LeetCode problem solving.",
     backgroundImage: c1,
     isPrivate: false,
-    technologies: ["Python", "Java", "C++"]
+    technologies: ["Python", "Java", "C++"],
+    ownerUsername: "james"
   },
   {
     roomname: "Open Source Guild",
@@ -113,7 +126,8 @@ export const rooms = [
     desc: "Contribute to open source projects.",
     backgroundImage: c3,
     isPrivate: false,
-    technologies: ["Git", "GitHub", "Any"]
+    technologies: ["Git", "GitHub", "Any"],
+    ownerUsername: "karen"
   },
   {
     roomname: "TypeScript Tribe",
@@ -122,7 +136,9 @@ export const rooms = [
     desc: "TypeScript and modern JS best practices.",
     backgroundImage: c2,
     isPrivate: true,
-    technologies: ["TypeScript", "JavaScript"]
+    technologies: ["TypeScript", "JavaScript"],
+    ownerUsername: "leo",
+    code: "M4N5O6"
   }
 ];
 

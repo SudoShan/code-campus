@@ -22,6 +22,7 @@ type ExploreRoomCardProps = {
   backgroundImage: string;
   isPrivate?: boolean;
   link?: string;
+  onClick?: () => void;
 };
 
 const ExploreRoomCard: React.FC<ExploreRoomCardProps> = ({
@@ -29,10 +30,13 @@ const ExploreRoomCard: React.FC<ExploreRoomCardProps> = ({
   description,
   backgroundImage,
   isPrivate = false,
-  link = "/"
+  link = "/",
+  onClick
 }) => {
+  const asType = isPrivate ? "div" : "a";
+  const hrefVal = isPrivate ? undefined : link;
   return (
-    <ShadowCardBase backgroundImage={backgroundImage} height={60} as="a" href={link}>
+    <ShadowCardBase backgroundImage={backgroundImage} height={60} as={asType} href={hrefVal} onClick={onClick} style={onClick ? { cursor: "pointer" } : {}}>
       <div style={{
         display: "flex",
         flexDirection: "column",

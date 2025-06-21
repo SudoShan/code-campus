@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ExploreRoomCard from "../components/ExploreRoomCard";
 import { rooms } from "./RoomsPage";
 import { FaSortAlphaDown, FaSortNumericDown, FaStar, FaSearch } from "react-icons/fa";
+import JoinRoomPopup from "../components/JoinRoomPopup";
 
 // Collect all unique technologies
 const allTechnologies = Array.from(
@@ -28,6 +29,7 @@ export default function ExplorePage() {
   const [sortBy, setSortBy] = useState("rating");
   const [search, setSearch] = useState("");
   const [searchActive, setSearchActive] = useState(false);
+  const [joinPopupRoom, setJoinPopupRoom] = useState<string | null>(null);
 
   // Filtering logic
   const filteredRooms = rooms.filter(room => {
@@ -209,10 +211,17 @@ export default function ExplorePage() {
               description={room.desc}
               backgroundImage={room.backgroundImage}
               isPrivate={room.isPrivate}
-              link={"/rooms/" + room.roomname.toLowerCase().replace(/\s+/g, "-")}
+              link={room.isPrivate ? undefined : "/rooms/" + room.roomname.toLowerCase().replace(/\s+/g, "-")}
+              onClick={room.isPrivate ? () => setJoinPopupRoom(room.roomname) : undefined}
             />
           ))}
         </div>
+        {joinPopupRoom && (
+          <JoinRoomPopup
+            roomName={joinPopupRoom}
+            onClose={() => setJoinPopupRoom(null)}
+          />
+        )}
       </main>
     </div>
   );
