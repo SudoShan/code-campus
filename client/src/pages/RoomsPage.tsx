@@ -1,9 +1,10 @@
-import type React from 'react';
+import React, { useEffect } from 'react';
 import bgImage from '../assets/bg.png';
 import PopularCard from '../components/PopularCard';
 import YourRoomCard from '../components/YourRoomCard';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
+import CreateRoomPopup from '../components/CreateRoomPopup';
 import c1 from '../assets/Cards/1.jpg';
 import c2 from '../assets/Cards/2.jpg';
 import c3 from '../assets/Cards/3.jpg';
@@ -14,7 +15,8 @@ import c7 from '../assets/Cards/7.jpg';
 import c8 from '../assets/Cards/8.jpg';
 import c9 from '../assets/Cards/9.jpg';
 
-// Room data with static backgroundImage for each
+
+// Room data with all attributes consistent with CreateRoomPopup
 export const rooms = [
   {
     roomname: "Python Beginners",
@@ -24,7 +26,9 @@ export const rooms = [
     backgroundImage: c6,
     isPrivate: false,
     technologies: ["Python"],
-    ownerUsername: "alice"
+    ownerUsername: "alice",
+    discoverable: true,
+    managers: ["alice"]
   },
   {
     roomname: "Flask Web Dev",
@@ -34,7 +38,9 @@ export const rooms = [
     backgroundImage: c2,
     isPrivate: false,
     technologies: ["Python", "Flask"],
-    ownerUsername: "bob"
+    ownerUsername: "bob",
+    discoverable: true,
+    managers: ["bob"]
   },
   {
     roomname: "React Learners",
@@ -45,7 +51,9 @@ export const rooms = [
     isPrivate: true,
     technologies: ["JavaScript", "React"],
     ownerUsername: "carol",
-    code: "A1B2C3"
+    code: "A1B2C3",
+    discoverable: false,
+    managers: ["carol"]
   },
   {
     roomname: "Competitive Coding",
@@ -55,7 +63,9 @@ export const rooms = [
     backgroundImage: c1,
     isPrivate: false,
     technologies: ["C++", "Python", "Algorithms"],
-    ownerUsername: "dave"
+    ownerUsername: "dave",
+    discoverable: true,
+    managers: ["dave"]
   },
   {
     roomname: "Data Science Hub",
@@ -66,7 +76,9 @@ export const rooms = [
     isPrivate: true,
     technologies: ["Python", "Pandas", "NumPy", "scikit-learn"],
     ownerUsername: "eve",
-    code: "X9Y8Z7"
+    code: "X9Y8Z7",
+    discoverable: true,
+    managers: ["eve", "bob"]
   },
   {
     roomname: "Java Masters",
@@ -76,7 +88,9 @@ export const rooms = [
     backgroundImage: c2,
     isPrivate: false,
     technologies: ["Java"],
-    ownerUsername: "frank"
+    ownerUsername: "frank",
+    discoverable: true,
+    managers: ["frank"]
   },
   {
     roomname: "Fullstack Projects",
@@ -86,7 +100,9 @@ export const rooms = [
     backgroundImage: c3,
     isPrivate: false,
     technologies: ["Node.js", "React", "MongoDB", "Express"],
-    ownerUsername: "grace"
+    ownerUsername: "grace",
+    discoverable: true,
+    managers: ["grace"]
   },
   {
     roomname: "Django Developers",
@@ -97,7 +113,9 @@ export const rooms = [
     isPrivate: true,
     technologies: ["Python", "Django"],
     ownerUsername: "hank",
-    code: "Q2W3E4"
+    code: "Q2W3E4",
+    discoverable: false,
+    managers: ["hank"]
   },
   {
     roomname: "Android Studio",
@@ -107,7 +125,9 @@ export const rooms = [
     backgroundImage: c3,
     isPrivate: false,
     technologies: ["Kotlin", "Android Studio"],
-    ownerUsername: "irene"
+    ownerUsername: "irene",
+    discoverable: true,
+    managers: ["irene"]
   },
   {
     roomname: "LeetCode Warriors",
@@ -117,7 +137,9 @@ export const rooms = [
     backgroundImage: c1,
     isPrivate: false,
     technologies: ["Python", "Java", "C++"],
-    ownerUsername: "james"
+    ownerUsername: "james",
+    discoverable: true,
+    managers: ["james"]
   },
   {
     roomname: "Open Source Guild",
@@ -127,7 +149,9 @@ export const rooms = [
     backgroundImage: c3,
     isPrivate: false,
     technologies: ["Git", "GitHub", "Any"],
-    ownerUsername: "karen"
+    ownerUsername: "karen",
+    discoverable: true,
+    managers: ["karen"]
   },
   {
     roomname: "TypeScript Tribe",
@@ -138,7 +162,9 @@ export const rooms = [
     isPrivate: true,
     technologies: ["TypeScript", "JavaScript"],
     ownerUsername: "leo",
-    code: "M4N5O6"
+    code: "M4N5O6",
+    discoverable: false,
+    managers: ["leo"]
   }
 ];
 
@@ -147,17 +173,44 @@ const ownerRooms = [
   {
     roomName: "My Algorithms Class",
     backgroundImage: c7,
-    link: "/rooms/algorithms"
+    link: "/rooms/algorithms",
+    isPrivate: false,
+    technologies: ["Python", "C++"],
+    discoverable: true,
+    managers: ["alice", "bob"],
+    userCount: 42,
+    rating: 4.8,
+    desc: "Algorithm practice and discussions.",
+    ownerUsername: "alice",
+    code: undefined // or a string if private
   },
   {
     roomName: "Project X Team",
     backgroundImage: c2,
-    link: "/rooms/project-x"
+    link: "/rooms/project-x",
+    isPrivate: true,
+    technologies: ["Java", "HTML&CSS"],
+    discoverable: false,
+    managers: ["bob"],
+    userCount: 18,
+    rating: 4.6,
+    desc: "Team workspace for Project X.",
+    ownerUsername: "bob",
+    code: "PX1234"
   },
   {
     roomName: "Study Buddies",
     backgroundImage: c4,
-    link: "/rooms/study-buddies"
+    link: "/rooms/study-buddies",
+    isPrivate: false,
+    technologies: ["Python"],
+    discoverable: true,
+    managers: ["carol"],
+    userCount: 27,
+    rating: 4.7,
+    desc: "Find partners for group study.",
+    ownerUsername: "carol",
+    code: undefined
   }
 ];
 
@@ -197,6 +250,19 @@ export default function RoomsPage() {
     .slice(0, 4);
 
   const navigate = useNavigate();
+  const [showCreatePopup, setShowCreatePopup] = React.useState(false);
+
+  // Disable body scroll when popup is open
+  useEffect(() => {
+    if (showCreatePopup) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showCreatePopup]);
 
   return (
     <div
@@ -314,8 +380,8 @@ export default function RoomsPage() {
               </h3>
               <button
                 style={{
-                  background: "#e0e7ff", // light blue
-                  color: "#2563eb",      // blue-600
+                  background: "#e0e7ff",
+                  color: "#2563eb",
                   fontWeight: 600,
                   fontSize: 16,
                   border: "none",
@@ -325,17 +391,18 @@ export default function RoomsPage() {
                   transition: "background 0.15s, color 0.15s, box-shadow 0.15s",
                   boxShadow: "0 2px 8px rgba(0,0,0,0.07)"
                 }}
+                onClick={() => setShowCreatePopup(true)}
                 onMouseOver={e => {
-                  (e.currentTarget as HTMLButtonElement).style.background = "#dbeafe"; // blue-100
-                  (e.currentTarget as HTMLButtonElement).style.color = "#1d4ed8";     // blue-700
+                  (e.currentTarget as HTMLButtonElement).style.background = "#dbeafe";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#1d4ed8";
                 }}
                 onMouseOut={e => {
                   (e.currentTarget as HTMLButtonElement).style.background = "#e0e7ff";
                   (e.currentTarget as HTMLButtonElement).style.color = "#2563eb";
                 }}
                 onMouseDown={e => {
-                  (e.currentTarget as HTMLButtonElement).style.background = "#93c5fd"; // blue-300
-                  (e.currentTarget as HTMLButtonElement).style.color = "#1e40af";     // blue-800
+                  (e.currentTarget as HTMLButtonElement).style.background = "#93c5fd";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#1e40af";
                 }}
                 onMouseUp={e => {
                   (e.currentTarget as HTMLButtonElement).style.background = "#dbeafe";
@@ -451,6 +518,9 @@ export default function RoomsPage() {
           </div>
         </div>
         <div></div>
+        {showCreatePopup && (
+          <CreateRoomPopup onClose={() => setShowCreatePopup(false)} />
+        )}
         <Footer />
       </div>
     </div>

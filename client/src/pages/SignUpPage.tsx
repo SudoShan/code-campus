@@ -18,7 +18,7 @@ const SignupPage: React.FC = () => {
   const [emailShake, setEmailShake] = useState(false);
 
   const [password, setPassword] = useState('');
-  const [_, setPasswordErrors] = useState<PasswordErrors>({
+  const [/* passwordErrors */, setPasswordErrors] = useState<PasswordErrors>({
     length: false,
     uppercase: false,
     specialChar: false,
