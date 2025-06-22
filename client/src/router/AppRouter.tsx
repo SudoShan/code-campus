@@ -9,6 +9,7 @@ import AssignmentPage from "../pages/AssignmentPage";
 import RoomsPage from "../pages/RoomsPage";
 import MainLayout from "../layouts/MainLayout";
 import ExplorePage from "../pages/ExplorePage";
+import RoomCreator from "../pages/roomcreator";
 
 const AppRouter = () => {
   return (
@@ -22,6 +23,7 @@ const AppRouter = () => {
           <Route path="/Dashboard/Room" element={<RoomPage />} />
           <Route path="/AssignmentPage" element={<AssignmentPage />} />
           <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/roomcreator" element={<RoomCreator />} />
         </Route>
 
         
